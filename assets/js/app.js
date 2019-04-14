@@ -90,7 +90,7 @@ function questionOne() {
         console.log(selection);
 
         //incorrect
-        if (this !== multipleChoice[2]) {
+        if ($(this).attr("data-random") !== multipleChoice[2]) {
             clearInterval(intervalId);
             totalIncorrect++;
             wrongAnswer();
@@ -100,7 +100,7 @@ function questionOne() {
         else {
             clearInterval(intervalId);
             totalCorrect++;
-            //rightAnswer()
+            rightAnswer();
             console.log("total correct so far: " + totalCorrect)
         }
     });
@@ -108,14 +108,14 @@ function questionOne() {
 
 function decrement() {
     time--;
-    $("#timer").html("<h2>" + time + "</h2>");
+    $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
     if (time === 0) {
         clearInterval(intervalId);
         totalUnanswered++;
         timesUp();
         //add a times up image
         console.log("total unanswered: " + totalUnanswered);
-        setTimeout(function () { alert("initiate phase 2") }, 5000)
+        setTimeout(function () { alert("initiate phase 2") }, 3000)
     }
 }
 
@@ -133,8 +133,15 @@ function wrongAnswer() {
     $('#gameStart').html('<h2>' + "Wrong Answer!" + '</h2>');
 }
 
+function rightAnswer() {
+    $('#timer').empty();
+    $('#question').empty();
+    $('#multipleChoice').empty();
+    $('#gameStart').html('<h2>' + "Thats Correct!" + '</h2>');
+}
+
 $('#gameStart').on("click", function (event) {
-    console.log("button works")
+    // console.log("button works")
     questionOne();
 });
 
