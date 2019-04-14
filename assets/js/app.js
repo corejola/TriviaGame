@@ -106,8 +106,6 @@ function questionOne() {
     });
 }
 
-
-
 function decrement() {
     time--;
     $("#timer").html("<h2>" + time + "</h2>");
