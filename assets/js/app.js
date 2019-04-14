@@ -1,4 +1,4 @@
-//MOBILE SUIT GUNDAM TRIVIA GAME
+//UNIVERSAL CENTURY MOBILE SUIT GUNDAMTRIVIA GAME
 
 /*  1) Start Screen
         1.1) Start Game button initiates the game - function
@@ -8,7 +8,7 @@
             Total Unanswered = 0
 
     2) Question 1
-        2.1) set interval timer ~45s (45000ms) decrement
+        2.1) set interval timer ~45s decrement 1000s
         2.2) create HTML element for question 1 and display in the DOM
         2.2) create HTML elements for mulitple choice
             var array for multiple Choice
@@ -38,13 +38,14 @@
         Display Total Unanswered
         Start Over button - restarts the game calls on psuedo code 1)
 */
-
+//Global variables
 var totalCorrect = 0;
 var totalIncorrect = 0;
 var totalUnanswered = 0;
-var time = 45;
+//test time 10s, game time 30s
+var time = 10;
 var intervalId;
-var question = ["Who?", "What?", "Where?" + "When?" + "Why?"]
+var question = ["Who is the Red Commet?", "What?", "Where?" + "When?" + "Why?"]
 
 function gameStart() {
     totalCorrect = 0;
@@ -52,39 +53,92 @@ function gameStart() {
     totalUnanswered = 0;
 
     var gameStartButton = $('<button>' + "Game Start" + '</button>')
-    gameStartButton.attr("class", "btn btn-primary btn-lg");
+    gameStartButton.attr("class", "center btn btn-primary btn-lg");
     $('#gameStart').html(gameStartButton);
 
 }
 
 function questionOne() {
+    //question specific variables
+    var multipleChoice = ["Anaval Gato", "Johnny Ridden", "Char Aznable", "Garma Zabi"]
+    var correctAnswer = multipleChoice[2];
 
-    var multipleChoice = ["A", "B", "C", "D"]
+    //set time
     $('#gameStart').empty(); //clears screen
     intervalId = setInterval(decrement, 1000);
-    //
+
+    //set question
     var questionDiv = $('<h3>' + question[0] + "</h3>")
     $('#question').html(questionDiv);
 
+    //set multiple choice buttons
     for (var i = 0; i < multipleChoice.length; i++) {
-        var multipleChoiceButtons = $('<br><button>' + multipleChoice[i] + '</button>');
+        var multipleChoiceButtons = $('<button>' + multipleChoice[i] + '</button>');
+        multipleChoiceButtons.attr({
+            "class": "choice",
+            "data-random": multipleChoice[i]
+        });
         $('#multipleChoice').append(multipleChoiceButtons);
     }
+    //question parameters
+    //timer
+    // see decrement function
 
+    // correct answer is mulitpleChoice[2]
+    $('.choice').on("click", function (event) {
+        var selection = $(this).attr("data-random")
+        console.log(selection);
+
+        //incorrect
+        if (this !== multipleChoice[2]) {
+            clearInterval(intervalId);
+            totalIncorrect++;
+            wrongAnswer();
+            console.log("total incorrect so far: " + totalIncorrect)
+        }
+        //correct answer is [2]
+        else {
+            clearInterval(intervalId);
+            totalCorrect++;
+            //rightAnswer()
+            console.log("total correct so far: " + totalCorrect)
+        }
+    });
 }
+
+
 
 function decrement() {
     time--;
     $("#timer").html("<h2>" + time + "</h2>");
     if (time === 0) {
         clearInterval(intervalId);
-        alert("Time Up!");
+        totalUnanswered++;
+        timesUp();
+        //add a times up image
+        console.log("total unanswered: " + totalUnanswered);
+        setTimeout(function () { alert("initiate phase 2") }, 5000)
     }
+}
+
+function timesUp() {
+    $('#timer').empty();
+    $('#question').empty();
+    $('#multipleChoice').empty();
+    $('#gameStart').html('<h2>' + "Times Up!" + '</h2>');
+}
+
+function wrongAnswer() {
+    $('#timer').empty();
+    $('#question').empty();
+    $('#multipleChoice').empty();
+    $('#gameStart').html('<h2>' + "Wrong Answer!" + '</h2>');
 }
 
 $('#gameStart').on("click", function (event) {
     console.log("button works")
     questionOne();
 });
+
 
 gameStart()
