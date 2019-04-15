@@ -49,8 +49,8 @@ var question = {
     questionTwo: "What was the flag ship of the Neo Zeon during the 2nd Neo Zeon War?",
     questionThree: "What incident resulted in the creation of the Titans",
     questionFour: "What year did the One Year War start?",
-    questionFive: "Which was the last Gundam piloted by Amuro Ray?",
-    questionSix: "Where did the majority of the Zeon fleet surrend to after the One Year War?"
+    questionFive: "Which was the last Gundam Amuro Ray piloted?",
+    questionSix: "Where did the majority of the Zeon fleet retreat to after the One Year War?"
 }
 var multipleChoice = {
     answerOne: ["Anaval Gato", "Johnny Ridden", "Char Aznable", "Garma Zabi"],
@@ -66,20 +66,48 @@ function gameStart() {
     totalIncorrect = 0;
     totalUnanswered = 0;
 
-    var gameStartButton = $('<button>' + "Game Start" + '</button>')
+    var gameStartButton = $('<button>' + "LAUNCH!" + '</button>');
     gameStartButton.attr("class", "center btn btn-primary btn-lg");
     $('#gameStart').html(gameStartButton);
+
+    $('#gameStart').on("click", function (event) {
+        // console.log("button works")
+        questionOne();
+    });
 }
 
 function questionOne() {
+    clearInterval(intervalId)
     //question specific variables
-
     var correctAnswer = multipleChoice.answerOne[2];
 
-    //set time
     //clears screen
-    intervalId = setInterval(decrement, 1000);
     $('#gameStart').empty();
+    $('#correct').empty();
+    $('#incorrect').empty();
+    $('#unanswered').empty();
+    $('#timer').empty();
+    $('#mulitpleChoice').empty();
+
+    totalCorrect = 0;
+    totalIncorrect = 0;
+    totalUnanswered = 0;
+    time = 10;
+
+    //set timer
+    // see decrement function
+    intervalId = setInterval(decrement, 1000);
+    function decrement() {
+        $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
+        time--;
+        if (time === -1) {
+            clearInterval(intervalId);
+            totalUnanswered++;
+            timesUp();
+            setTimeout(function () { questionTwo(); }, 2000)
+            console.log("total unanswered: " + totalUnanswered);
+        }
+    }
 
     //set question
     var questionDiv = $('<h3>' + question.questionOne + "</h3>")
@@ -94,21 +122,13 @@ function questionOne() {
         });
         $('#multipleChoice').append(multipleChoiceButtons);
     }
-    //question parameters
-    //timer
-    // see decrement function
 
+    //question parameters
     $('.choice').on("click", function (event) {
         var selection = $(this).attr("data-random")
         console.log(selection);
-
-        if (time === 0) {
-
-            clearInterval(intervarlId);
-            setTimeout(function () { questionTwo() }, 2000);
-        }
         //incorrect
-        if ($(this).attr("data-random") !== correctAnswer) {
+        if (selection !== correctAnswer) {
             clearInterval(intervalId);
             totalIncorrect++;
             wrongAnswer();
@@ -132,7 +152,17 @@ function questionTwo() {
     time = 10;
     $('#gameStart').empty();
     intervalId = setInterval(decrement, 1000);
-
+    function decrement() {
+        $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
+        time--;
+        if (time === -1) {
+            clearInterval(intervalId);
+            totalUnanswered++;
+            timesUp();
+            setTimeout(function () { questionThree(); }, 2000)
+            console.log("total unanswered: " + totalUnanswered);
+        }
+    }
     var questionDiv = $('<h3>' + question.questionTwo + "</h3>")
     $('#question').html(questionDiv);
 
@@ -148,12 +178,7 @@ function questionTwo() {
     $('.choice').on("click", function (event) {
         var selection = $(this).attr("data-random")
         console.log(selection);
-        if (time === 0) {
-            decrement();
-            clearInterval(intervarlId);
-            setTimeout(function () { questionThree() }, 2000);
-        }
-        if ($(this).attr("data-random") !== correctAnswer) {
+        if (selection !== correctAnswer) {
             clearInterval(intervalId);
             totalIncorrect++;
             wrongAnswer();
@@ -175,7 +200,17 @@ function questionThree() {
     time = 10;
     $('#gameStart').empty();
     intervalId = setInterval(decrement, 1000);
-
+    function decrement() {
+        $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
+        time--;
+        if (time === -1) {
+            clearInterval(intervalId);
+            totalUnanswered++;
+            timesUp();
+            setTimeout(function () { questionFour(); }, 2000)
+            console.log("total unanswered: " + totalUnanswered);
+        }
+    }
     var questionDiv = $('<h3>' + question.questionThree + "</h3>")
     $('#question').html(questionDiv);
 
@@ -191,12 +226,8 @@ function questionThree() {
     $('.choice').on("click", function (event) {
         var selection = $(this).attr("data-random")
         console.log(selection);
-        if (time === 0) {
-            decrement();
-            clearInterval(intervarlId);
-            setTimeout(function () { questionFour() }, 2000);
-        }
-        if ($(this).attr("data-random") !== correctAnswer) {
+
+        if (selection !== correctAnswer) {
             clearInterval(intervalId);
             totalIncorrect++;
             wrongAnswer();
@@ -218,7 +249,17 @@ function questionFour() {
     time = 10;
     $('#gameStart').empty();
     intervalId = setInterval(decrement, 1000);
-
+    function decrement() {
+        $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
+        time--;
+        if (time === -1) {
+            clearInterval(intervalId);
+            totalUnanswered++;
+            timesUp();
+            setTimeout(function () { questionFive(); }, 2000)
+            console.log("total unanswered: " + totalUnanswered);
+        }
+    }
     var questionDiv = $('<h3>' + question.questionFour + "</h3>")
     $('#question').html(questionDiv);
 
@@ -234,12 +275,8 @@ function questionFour() {
     $('.choice').on("click", function (event) {
         var selection = $(this).attr("data-random")
         console.log(selection);
-        if (time === 0) {
-            decrement();
-            clearInterval(intervarlId);
-            setTimeout(function () { questionFive() }, 2000);
-        }
-        if ($(this).attr("data-random") !== correctAnswer) {
+
+        if (selection !== correctAnswer) {
             clearInterval(intervalId);
             totalIncorrect++;
             wrongAnswer();
@@ -261,7 +298,17 @@ function questionFive() {
     time = 10;
     $('#gameStart').empty();
     intervalId = setInterval(decrement, 1000);
-
+    function decrement() {
+        $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
+        time--;
+        if (time === -1) {
+            clearInterval(intervalId);
+            totalUnanswered++;
+            timesUp();
+            setTimeout(function () { questionSix(); }, 2000)
+            console.log("total unanswered: " + totalUnanswered);
+        }
+    }
     var questionDiv = $('<h3>' + question.questionFive + "</h3>")
     $('#question').html(questionDiv);
 
@@ -277,12 +324,8 @@ function questionFive() {
     $('.choice').on("click", function (event) {
         var selection = $(this).attr("data-random")
         console.log(selection);
-        if (time === 0) {
-            decrement();
-            clearInterval(intervarlId);
-            setTimeout(function () { questionSix() }, 2000);
-        }
-        if ($(this).attr("data-random") !== correctAnswer) {
+
+        if (selection !== correctAnswer) {
             clearInterval(intervalId);
             totalIncorrect++;
             wrongAnswer();
@@ -299,26 +342,68 @@ function questionFive() {
     });
 
 }
-
 function questionSix() {
-
-
-}
-function endSummary() {
-
-
-}
-
-function decrement() {
-    $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
-    time--;
-    if (time === 0) {
-        clearInterval(intervalId);
-        totalUnanswered++;
-        timesUp();
-        //add a times up image
-        console.log("total unanswered: " + totalUnanswered);
+    var correctAnswer = multipleChoice.answerSix[2];
+    time = 10;
+    $('#gameStart').empty();
+    intervalId = setInterval(decrement, 1000);
+    function decrement() {
+        $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
+        time--;
+        if (time === -1) {
+            clearInterval(intervalId);
+            totalUnanswered++;
+            timesUp();
+            setTimeout(function () { endSummary(); }, 2000)
+            console.log("total unanswered: " + totalUnanswered);
+        }
     }
+    var questionDiv = $('<h3>' + question.questionSix + "</h3>")
+    $('#question').html(questionDiv);
+
+    for (var i = 0; i < multipleChoice.answerSix.length; i++) {
+        var multipleChoiceButtons = $('<button>' + multipleChoice.answerSix[i] + '</button>');
+        multipleChoiceButtons.attr({
+            "class": "choice",
+            "data-random": multipleChoice.answerSix[i]
+        });
+        $('#multipleChoice').append(multipleChoiceButtons);
+    }
+
+    $('.choice').on("click", function (event) {
+        var selection = $(this).attr("data-random")
+        console.log(selection);
+
+        if (selection !== correctAnswer) {
+            clearInterval(intervalId);
+            totalIncorrect++;
+            wrongAnswer();
+            console.log("total incorrect so far: " + totalIncorrect)
+            setTimeout(function () { endSummary() }, 2000)
+        }
+        else {
+            clearInterval(intervalId);
+            totalCorrect++;
+            rightAnswer();
+            console.log("total correct so far: " + totalCorrect)
+            setTimeout(function () { endSummary() }, 2000)
+        }
+    });
+}
+
+function endSummary() {
+    $('#timer').empty().html('<h3>' + "GAME OVER" + '</h3>');
+    $('#correct').html('<h3>' + "Total Answered Correctly: " + totalCorrect + '</h3>');
+    $('#incorrect').html('<h3>' + "Total Answered Incorrectly: " + totalIncorrect + '</h3>');
+    $('#unanswered').html('<h3>' + "Total Unanswered: " + totalUnanswered + '</h3>');
+    $('#gameStart').empty();
+
+    //resetart button
+    var gameRestartButton = $('<button>' + "Try Again?" + '</button>')
+    $('#gameStart').html(gameRestartButton);
+    $('#gameStart').on("click", function (event) {
+        questionOne();
+    });
 }
 
 function timesUp() {
@@ -333,6 +418,7 @@ function wrongAnswer() {
     $('#question').empty();
     $('#multipleChoice').empty();
     $('#gameStart').html('<h2>' + "Wrong Answer!" + '</h2>');
+
 }
 
 function rightAnswer() {
@@ -341,11 +427,5 @@ function rightAnswer() {
     $('#multipleChoice').empty();
     $('#gameStart').html('<h2>' + "Thats Correct!" + '</h2>');
 }
-
-$('#gameStart').on("click", function (event) {
-    // console.log("button works")
-    questionOne();
-});
-
 
 gameStart()
