@@ -1,5 +1,4 @@
 //UNIVERSAL CENTURY MOBILE SUIT GUNDAMTRIVIA GAME
-
 /*  1) Start Screen
         1.1) Start Game button initiates the game - function
         1.2) clear the score board
@@ -67,7 +66,7 @@ function gameStart() {
     totalUnanswered = 0;
 
     var gameStartButton = $('<button>' + "LAUNCH!" + '</button>');
-    gameStartButton.attr("class", "center btn btn-primary btn-lg");
+    gameStartButton.attr("class", "d-flex justify-content-center");
     $('#gameStart').html(gameStartButton);
 
     $('#gameStart').on("click", function (event) {
@@ -86,8 +85,7 @@ function questionOne() {
     $('#correct').empty();
     $('#incorrect').empty();
     $('#unanswered').empty();
-    $('#timer').empty();
-    $('#mulitpleChoice').empty();
+    $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
 
     totalCorrect = 0;
     totalIncorrect = 0;
@@ -114,10 +112,11 @@ function questionOne() {
     $('#question').html(questionDiv);
 
     //set multiple choice buttons
+    $('#mulitpleChoice').empty();
     for (var i = 0; i < multipleChoice.answerOne.length; i++) {
         var multipleChoiceButtons = $('<button>' + multipleChoice.answerOne[i] + '</button>');
         multipleChoiceButtons.attr({
-            "class": "choice",
+            "class": "choice d-flex justify-content-center",
             "data-random": multipleChoice.answerOne[i]
         });
         $('#multipleChoice').append(multipleChoiceButtons);
@@ -151,6 +150,7 @@ function questionTwo() {
     var correctAnswer = multipleChoice.answerTwo[1];
     time = 10;
     $('#gameStart').empty();
+    $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
     intervalId = setInterval(decrement, 1000);
     function decrement() {
         $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
@@ -169,7 +169,7 @@ function questionTwo() {
     for (var i = 0; i < multipleChoice.answerTwo.length; i++) {
         var multipleChoiceButtons = $('<button>' + multipleChoice.answerTwo[i] + '</button>');
         multipleChoiceButtons.attr({
-            "class": "choice",
+            "class": "choice d-flex justify-content-center",
             "data-random": multipleChoice.answerTwo[i]
         });
         $('#multipleChoice').append(multipleChoiceButtons);
@@ -199,6 +199,7 @@ function questionThree() {
     var correctAnswer = multipleChoice.answerThree[3];
     time = 10;
     $('#gameStart').empty();
+    $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
     intervalId = setInterval(decrement, 1000);
     function decrement() {
         $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
@@ -217,7 +218,7 @@ function questionThree() {
     for (var i = 0; i < multipleChoice.answerThree.length; i++) {
         var multipleChoiceButtons = $('<button>' + multipleChoice.answerThree[i] + '</button>');
         multipleChoiceButtons.attr({
-            "class": "choice",
+            "class": "choice d-flex justify-content-center",
             "data-random": multipleChoice.answerThree[i]
         });
         $('#multipleChoice').append(multipleChoiceButtons);
@@ -248,6 +249,7 @@ function questionFour() {
     var correctAnswer = multipleChoice.answerFour[0];
     time = 10;
     $('#gameStart').empty();
+    $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
     intervalId = setInterval(decrement, 1000);
     function decrement() {
         $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
@@ -266,7 +268,7 @@ function questionFour() {
     for (var i = 0; i < multipleChoice.answerFour.length; i++) {
         var multipleChoiceButtons = $('<button>' + multipleChoice.answerFour[i] + '</button>');
         multipleChoiceButtons.attr({
-            "class": "choice",
+            "class": "choice d-flex justify-content-center",
             "data-random": multipleChoice.answerFour[i]
         });
         $('#multipleChoice').append(multipleChoiceButtons);
@@ -297,6 +299,7 @@ function questionFive() {
     var correctAnswer = multipleChoice.answerFive[3];
     time = 10;
     $('#gameStart').empty();
+    $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
     intervalId = setInterval(decrement, 1000);
     function decrement() {
         $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
@@ -315,7 +318,7 @@ function questionFive() {
     for (var i = 0; i < multipleChoice.answerFive.length; i++) {
         var multipleChoiceButtons = $('<button>' + multipleChoice.answerFive[i] + '</button>');
         multipleChoiceButtons.attr({
-            "class": "choice",
+            "class": "choice d-flex justify-content-center",
             "data-random": multipleChoice.answerFive[i]
         });
         $('#multipleChoice').append(multipleChoiceButtons);
@@ -346,6 +349,8 @@ function questionSix() {
     var correctAnswer = multipleChoice.answerSix[2];
     time = 10;
     $('#gameStart').empty();
+    $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
+
     intervalId = setInterval(decrement, 1000);
     function decrement() {
         $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
@@ -364,7 +369,7 @@ function questionSix() {
     for (var i = 0; i < multipleChoice.answerSix.length; i++) {
         var multipleChoiceButtons = $('<button>' + multipleChoice.answerSix[i] + '</button>');
         multipleChoiceButtons.attr({
-            "class": "choice",
+            "class": "choice d-flex justify-content-center",
             "data-random": multipleChoice.answerSix[i]
         });
         $('#multipleChoice').append(multipleChoiceButtons);
@@ -396,6 +401,7 @@ function endSummary() {
     $('#correct').html('<h3>' + "Total Answered Correctly: " + totalCorrect + '</h3>');
     $('#incorrect').html('<h3>' + "Total Answered Incorrectly: " + totalIncorrect + '</h3>');
     $('#unanswered').html('<h3>' + "Total Unanswered: " + totalUnanswered + '</h3>');
+    $('#multipleChoice').empty();
     $('#gameStart').empty();
 
     //resetart button
@@ -418,7 +424,6 @@ function wrongAnswer() {
     $('#question').empty();
     $('#multipleChoice').empty();
     $('#gameStart').html('<h2>' + "Wrong Answer!" + '</h2>');
-
 }
 
 function rightAnswer() {
