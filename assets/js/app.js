@@ -64,9 +64,9 @@ function gameStart() {
     totalCorrect = 0;
     totalIncorrect = 0;
     totalUnanswered = 0;
-
+    clearInterval(intervalId);
     var gameStartButton = $('<button>' + "LAUNCH!" + '</button>');
-    gameStartButton.attr("class", "d-flex justify-content-center");
+    gameStartButton.attr("class", "gameStart d-flex justify-content-center");
     $('#gameStart').html(gameStartButton);
 
     $('#gameStart').on("click", function (event) {
@@ -82,9 +82,6 @@ function questionOne() {
 
     //clears screen
     $('#gameStart').empty();
-    $('#correct').empty();
-    $('#incorrect').empty();
-    $('#unanswered').empty();
     $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
 
     totalCorrect = 0;
@@ -112,13 +109,14 @@ function questionOne() {
     $('#question').html(questionDiv);
 
     //set multiple choice buttons
-    $('#mulitpleChoice').empty();
+    // $('#mulitpleChoice').empty();
     for (var i = 0; i < multipleChoice.answerOne.length; i++) {
         var multipleChoiceButtons = $('<button>' + multipleChoice.answerOne[i] + '</button>');
         multipleChoiceButtons.attr({
             "class": "choice d-flex justify-content-center",
             "data-random": multipleChoice.answerOne[i]
         });
+
         $('#multipleChoice').append(multipleChoiceButtons);
     }
 
@@ -408,7 +406,15 @@ function endSummary() {
     var gameRestartButton = $('<button>' + "Try Again?" + '</button>')
     $('#gameStart').html(gameRestartButton);
     $('#gameStart').on("click", function (event) {
-        questionOne();
+        // questionOne();
+        $('#gameStart').empty();
+        $('#correct').empty();
+        $('#incorrect').empty();
+        $('#unanswered').empty();
+        $('#timer').empty();
+        $('#question').empty();
+        $('#multipleChoice').empty();
+        gameStart();
     });
 }
 
