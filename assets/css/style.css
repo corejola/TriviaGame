@@ -1,5 +1,6 @@
 .triviaSpace {
      background-color: black;
+     opacity: 20%;
      text-align: center;
      height: 250px;
 }
@@ -15,7 +16,6 @@ h1 {
 .gameStart {
     flex: auto;
     margin: auto;
-    margin: auto;
     font-size: 16px; 
     padding: 5 px;
 }
@@ -26,6 +26,7 @@ div {
 }
 
 button {
+    margin: auto;
     text-align: center;
 }
 
