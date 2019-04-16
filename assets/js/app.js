@@ -71,10 +71,84 @@ function gameStart() {
 
     $('#gameStart').on("click", function (event) {
         // console.log("button works")
+        //answer = multipleChoice.answerOne[2]
+        //question = question.questionOne
+        //choice = multipleChoice.answerOne
+        // trivia(multipleChoice.answerOne[2], question.questionOne, multipleChoice.answerOne);
+        // trivia(multipleChoice.answerTwo[1], question.questionTwo, multipleChoice.answerTwo);
         questionOne();
     });
 }
 
+
+// function trivia(answer, question, choice) {
+//     clearInterval(intervalId)
+//     //question specific variables
+//     var correctAnswer = answer;
+
+//     //clears screen
+//     $('#multipleChoice').empty();
+//     $('#gameStart').empty();
+//     $('#timer').html("<h2>" + "Time Remaining: " + "</h2>");
+
+//     totalCorrect = 0;
+//     totalIncorrect = 0;
+//     totalUnanswered = 0;
+//     time = 10;
+
+//     //set timer
+//     // see decrement function
+//     intervalId = setInterval(decrement, 1000);
+//     function decrement() {
+//         $("#timer").html("<h2>" + "Time Remaining: " + time + "s" + "</h2>");
+//         time--;
+//         if (time === -1) {
+//             clearInterval(intervalId);
+//             totalUnanswered++;
+//             timesUp();
+//             // setTimeout(function () { questionTwo(); }, 2000)
+//             console.log("total unanswered: " + totalUnanswered);
+//         }
+//     }
+
+//     //set question
+//     var questionDiv = $('<h3>' + question + "</h3>")
+//     $('#question').html(questionDiv);
+
+//     //set multiple choice buttons
+//     // $('#mulitpleChoice').empty();
+//     for (var i = 0; i < choice.length; i++) {
+//         var multipleChoiceButtons = $('<button>' + choice[i] + '</button>');
+//         multipleChoiceButtons.attr({
+//             "class": "choice d-flex justify-content-center",
+//             "data-random": choice[i]
+//         });
+
+//         $('#multipleChoice').append(multipleChoiceButtons);
+//     }
+
+//     //question parameters
+//     $('.choice').on("click", function (event) {
+//         var selection = $(this).attr("data-random")
+//         console.log(selection);
+//         //incorrect
+//         if (selection !== correctAnswer) {
+//             clearInterval(intervalId);
+//             totalIncorrect++;
+//             wrongAnswer();
+//             console.log("total incorrect so far: " + totalIncorrect)
+//             // setTimeout(function () { questionTwo() }, 2000)
+//         }
+//         //correct answer is [2]
+//         else {
+//             clearInterval(intervalId);
+//             totalCorrect++;
+//             rightAnswer();
+//             console.log("total correct so far: " + totalCorrect)
+//             // setTimeout(function () { questionTwo() }, 2000)
+//         }
+//     });
+// }
 function questionOne() {
     clearInterval(intervalId)
     //question specific variables
@@ -100,6 +174,7 @@ function questionOne() {
             totalUnanswered++;
             timesUp();
             setTimeout(function () { questionTwo(); }, 2000)
+
             console.log("total unanswered: " + totalUnanswered);
         }
     }
@@ -130,7 +205,7 @@ function questionOne() {
             totalIncorrect++;
             wrongAnswer();
             console.log("total incorrect so far: " + totalIncorrect)
-            setTimeout(function () { questionTwo() }, 2000)
+            setTimeout(function () { questionTwo() }, 3000)
         }
         //correct answer is [2]
         else {
@@ -138,7 +213,7 @@ function questionOne() {
             totalCorrect++;
             rightAnswer();
             console.log("total correct so far: " + totalCorrect)
-            setTimeout(function () { questionTwo() }, 2000)
+            setTimeout(function () { questionTwo() }, 3000)
         }
     });
 }
