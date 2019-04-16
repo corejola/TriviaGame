@@ -1,8 +1,37 @@
 .triviaSpace {
-     
+     background-color: black;
+     opacity: 20%;
+     text-align: center;
+     height: 250px;
 }
 
-#gameStart {
-    height: auto;
+h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.jumbotron{
+    background-color:black;
+}
+.gameStart {
+    flex: auto;
     margin: auto;
+    font-size: 16px; 
+    padding: 5 px;
+}
+
+
+div {
+    color: white;
+}
+
+button {
+    margin: auto;
+    text-align: center;
+}
+
+.choice  {
+    flex: auto;
+    margin: auto;
+    padding: 5 px;
 }
